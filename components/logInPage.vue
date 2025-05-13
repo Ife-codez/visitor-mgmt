@@ -8,9 +8,10 @@
       </div>
       <div class="flex flex-col items-center">
         <label for="password">Password</label>
-        <input type="password" id="password" v-model="loginForm.password" placeholder="Enter Your Password">
+        <input :type="password" id="password" v-model="loginForm.password" placeholder="Enter Your Password">
       </div>
       <div>
+        <button type="button" @click="switchPassword">eye</button>
         <button type="submit">Log In</button>
       </div>
     </form>
@@ -19,10 +20,24 @@
 
 <script setup>
   import { reactive } from 'vue'
+  // import { useUserStore } from '~/store/user';
+  const userStore = useUser();
+
+  const password = ref('password')
+
+  const switchPassword = () => {
+    if(password.value === 'password'){
+      password.value = 'text'
+      return;
+    }
+
+    password.value = 'password'
+  }
   const loginForm = reactive ({
-    email: '',
-    password: ''
+    email: 'ifemoneyy@gmail.com',
+    password: 'ifeoluwa123'
   })
+  // console.log(userStore.$state);
 
   const handleLogin = async () => {
     try {
@@ -31,7 +46,13 @@
         body: loginForm,
       });
 
-      console.log('Login successful:', response);
+      userStore.login({
+        message: response.message,
+        role: response.role,
+        vipId: response.vipId
+      })
+
+      alert(`${response.message}`);
 
       if(response.role === 'VIP') {
         navigateTo('/vipDashboard');

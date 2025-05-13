@@ -20,6 +20,6 @@ export default defineEventHandler(async (event) => {
   return {
     message: 'Login successful',
     role: user.role,
-    vipId: user.role === 'Secretary' ? user.vipId : null
+    vipId: user.vipId
   };
 });

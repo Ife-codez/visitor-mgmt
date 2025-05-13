@@ -2,8 +2,22 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss','nuxt-mongoose'],
+  modules: [
+    '@nuxtjs/tailwindcss',
+    'nuxt-mongoose',
+    '@pinia/nuxt',
+    'pinia-plugin-persistedstate/nuxt',
+    '@vueuse/nuxt'
+  ],
+  // piniaPluginPersistedstate: {
+  //   storage: 'localStorage',
+  // },
   mongoose: {
     uri: process.env.MONGO_URI,
+  },
+  nitro: {
+    experimental: {
+      websocket: true
+    }
   }
 })

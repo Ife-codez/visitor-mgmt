@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center gap-[10px]">
+  <div class="flex flex-col items-center gap-[10px] justify-center bg-white p-8 rounded-2xl shadow-lg w-full">
     <h2 class="text-4xl">Sign up page</h2>
     <form @submit.prevent="handleSignup" class="flex flex-col items-center gap-[30px]">
       <!-- name section -->
@@ -32,7 +32,7 @@
       </div>
       <!-- submit -->
       <div>
-        <button type="submit">Sign up</button>
+        <button type="submit" class="btn">Sign up</button>
       </div>
     </form>       
                                                                 
@@ -72,10 +72,17 @@ const handleSignup = async () => {
 </script>
 
 <style  scoped>
-  input {
+  input, select {
     border: 2px solid gray;
     width: 100%;
     padding: 5px 15px;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s, box shadow 0.2s;
+  }
+  input:focus, select:focus {
+    border-color: #12b488;
+    box-shadow: 0 0 0 2px rgba(15, 156, 117, 0.3)
   }
 
 </style>
