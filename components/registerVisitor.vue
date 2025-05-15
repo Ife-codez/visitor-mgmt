@@ -30,6 +30,13 @@ import { useRoom } from '~/composables/useRoom'
 import useUser from '~/composables/useUser'
 
 const user = useUser()
+onMounted(() => {
+  if ('Notification' in window ) {
+    Notification.requestPermission().then(permission => {
+      console.log('Notification permission:', permission)
+    })
+  }
+})
 const visitor = ref({
   name: '',
   purpose: '',
@@ -47,6 +54,7 @@ watchEffect(() => {
     }
   }
 })  
+
 const registerVisitor = async () => {
   if (!ws.value?.send) return
   const id = genRand()
@@ -75,6 +83,7 @@ const registerVisitor = async () => {
   visitor.value.purpose = ''
   visitor.value.phoneNo = ''
 }
+
 
 </script>
 

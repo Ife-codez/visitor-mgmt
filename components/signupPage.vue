@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-center gap-[10px] justify-center bg-white p-8 rounded-2xl shadow-lg w-full">
     <h2 class="text-4xl">Sign up page</h2>
-    <form @submit.prevent="handleSignup" class="flex flex-col items-center gap-[30px]">
+    <form @submit.prevent="handleSignup" class="flex flex-col  gap-[30px]">
       <!-- name section -->
       <div class="flex flex-col items-center">
         <label for="name">Name</label>
@@ -31,7 +31,7 @@
         <input type="password" id="password" name="password" placeholder="create strong passoword" v-model="userData.password" required>
       </div>
       <!-- submit -->
-      <div>
+      <div class="flex flex-col items-center">
         <button type="submit" class="btn">Sign up</button>
       </div>
     </form>       
@@ -84,5 +84,4 @@ const handleSignup = async () => {
     border-color: #12b488;
     box-shadow: 0 0 0 2px rgba(15, 156, 117, 0.3)
   }
-
 </style>

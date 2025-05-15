@@ -33,7 +33,13 @@ import { useRoom } from '~/composables/useRoom'
 const user = useUser()
 const requests = ref([])
 const ws = useRoom(user.vipId)
-
+onMounted(() => {
+  if ('Notification' in window ) {
+    Notification.requestPermission().then(permission => {
+      console.log('Notification permission:', permission)
+    })
+  }
+})
 // React to every new WebSocket message
 watch(() => ws?.data?.value, (raw) => {
   if (!raw || raw === 'ping' || raw === 'undefined') return
@@ -52,6 +58,17 @@ watch(() => ws?.data?.value, (raw) => {
     const exists = requests.value.some(v => v.id === parsed.payload.id)
     if (!exists) {
       requests.value.push(parsed.payload)
+    }
+    if (Notification.permission === 'granted') {
+      
+      const notify = new Notification('New visitor', {
+        body: `visitor: ${parsed.payload.name}`,
+        icon: '/favicon.ico'
+      })
+      notify.onclick = () => {
+        window.focus()
+        window.location.href = 'vipDashboard'
+      }
     }
   }
 })
@@ -94,7 +111,7 @@ onMounted(async () => {
     console.error('Failed to fetch pending visitors:', err)
   }
 })
-
+console.log('Notif supported:', 'Notification' in window)
  </script>
 
 <style scoped>

@@ -38,6 +38,13 @@ import { useRoom } from '~/composables/useRoom'
 const user = useUser()
 const history = ref([])
 let ws = null
+onMounted(() => {
+  if ('Notification' in window ) {
+    Notification.requestPermission().then(permission => {
+      console.log('Notification permission:', permission)
+    })
+  }
+})
 
 watchEffect(() => {
   if (!user.vipId) return
@@ -65,6 +72,16 @@ watchEffect(() => {
             history.value.push(parsed.payload)
           } else if (!existing.response && parsed.payload.response) {
             existing.response = parsed.payload.response
+          }
+          if (Notification.permission === 'granted') {
+            const notify = new Notification('visitor response', {
+              body: `${parsed.payload.name} : ${parsed.payload.response}`,
+              icon: 'favicon.ico'
+            })
+            notify.onclick = () => {
+              window.focus()
+              window.location.href = '/secDashboard'
+            }
           }
         }
       } catch (err) {
