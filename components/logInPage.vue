@@ -1,26 +1,28 @@
 <template>
-  <div class="flex flex-col items-center gap-[10px]">
-    <h2 class="text-4xl">Log in page</h2>
-    <form @submit.prevent="handleLogin" class="flex flex-col items-center gap-[30px]">
-      <div class="flex flex-col items-center">
+  <div class="min-h-screen flex items-center justify-center px-4 py-10">
+    <form @submit.prevent="handleLogin" class="w-full max-w-md bg-white shadow-md rounded-lg p-6 space-y-4">
+      <h2 class="text-2xl font-bold text-center">Log in page</h2>
+      <div>
         <label for="email">Email:</label>
-        <input type="email" id="email" v-model="loginForm.email" placeholder="email..">
+        <input type="email" id="email" v-model="loginForm.email" placeholder="email.." class="input" required>
       </div>
-      <div class="flex flex-col items-center">
+      <div>
         <label for="password">Password</label>
-        <input :type="password" id="password" v-model="loginForm.password" placeholder="Enter Your Password">
+        <input :type="password" id="password" v-model="loginForm.password" placeholder="Enter Your Password" class="input" required>
       </div>
       <div>
         <button type="button" @click="switchPassword">eye</button>
-        <button type="submit">Log In</button>
+        <button type="submit" class="btn w-full">Log In</button>
       </div>
     </form>
   </div>
 </template>
 
 <script setup>
+  import { useToast } from 'vue-toastification'
+  const toast = useToast()
   import { reactive } from 'vue'
-  // import { useUserStore } from '~/store/user';
+  
   const userStore = useUser();
 
   const password = ref('password')
@@ -37,7 +39,7 @@
     email: 'ifemoneyy@gmail.com',
     password: 'ifeoluwa123'
   })
-  // console.log(userStore.$state);
+  
 
   const handleLogin = async () => {
     try {
@@ -52,7 +54,11 @@
         vipId: response.vipId
       })
 
-      alert(`${response.message}`);
+      toast(response.message, {
+        type: 'success',
+        toastClassName: 'my-toast'
+      })
+      
 
       if(response.role === 'VIP') {
         navigateTo('/vipDashboard');
@@ -60,16 +66,15 @@
         navigateTo('secDashboard');
       }
     } catch (error) {
-      console.error('Login failed:', error.data || error);
+      toast('Login failed, Try again', {
+        type: 'error',
+        toastClassName: 'my-toast1'
+      })
     }
   };
 </script>
 
 <style scoped>
-  input {
-    border: 2px solid gray;
-    width: 100%;
-    padding: 5px 15px;
-  }
+  
 
 </style>

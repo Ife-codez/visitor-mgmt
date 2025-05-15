@@ -1,7 +1,7 @@
 <template>
-  <div class="overflow-x-auto">
-    <table class="min-w-full border-collapse border border-green-300">
-      <thead class="bg-gray-100">
+  <div class="overflow-x-auto rounded-lg shadow">
+    <table class="w-full border-collapse border border-green-300">
+      <thead class="bg-gray-100 uppercase">
         <tr>
           <th class="border border-gray-300 px-4 py-2 text-left">Name</th>
           <th class="border border-gray-300 px-4 py-2 text-left">Purpose</th>
@@ -15,8 +15,10 @@
           <td class="border border-gray-300 px-4 py-2">{{ visitor.purpose }}</td>
           <td class="border border-gray-300 px-4 py-2">{{ visitor.phoneNo }}</td>
           <td class="border border-gray-300 px-4 py-2">
-            <button class="btn" @click="respond(visitor, 'approved')">Approve</button>
-            <button class="butn" @click="respond(visitor, 'declined')">Decline</button>
+            <div class="flex gap-2">
+              <button class="btn" @click="respond(visitor, 'approved')">Approve</button>
+              <button class="butn" @click="respond(visitor, 'declined')">Decline</button>
+            </div>
           </td>
         </tr>
       </tbody>

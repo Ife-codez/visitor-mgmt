@@ -1,23 +1,24 @@
 <template>
-  <div>
-    <form @submit.prevent="registerVisitor" class="flex flex-col mx-auto gap-[15px] w-[80%]">
-      <div class="flex flex-col gap[10px]">
-        <label for="visitor-name">Enter Vistor's Name:</label>
-        <input type="text" id="visitor-name" placeholder="Enter visitor name" v-model="visitor.name">
-      </div>
-
-      <div class="flex flex-col gap[10px]">
-        <label for="purpose">Visitor's Purpose Of Visit</label>
-        <textarea name="visit-purpose" id="purpose" v-model="visitor.purpose" class="border border-gray-500 py-[5px] px[5px]"></textarea>
-      </div>
-
-      <div class="flex flex-col gap[10px]">
-        <label for="phone">Phone Number</label>
-        <input type="text" id="phone" placeholder="phone number" v-model="visitor.phoneNo">
+  <div class="w-full flex justify-center px-4">
+    <form @submit.prevent="registerVisitor" class="w-full max-w-md sm:max-w-[80%] bg-white rounded-lg shadow-md p-6 space-y-4">
+      <h2 class="text-xl font-bold mb-4 text-center">Register A Visitor</h2>
+      <div>
+        <label for="visitor-name" class="block font-medium mb-1">Enter Vistor's Name:</label>
+        <input type="text" id="visitor-name" placeholder="Enter visitor name" class="input" v-model="visitor.name" required>
       </div>
 
       <div>
-        <button type="submit" class="btn">Register</button>
+        <label for="purpose" class="block font-medium mb-1">Visitor's Purpose Of Visit</label>
+        <textarea name="visit-purpose" id="purpose" v-model="visitor.purpose" class="input h-24 resize-none" required></textarea>
+      </div>
+
+      <div>
+        <label for="phone" class="block font-medium mb-1">Phone Number</label>
+        <input type="text" id="phone" placeholder="phone number" v-model="visitor.phoneNo" class="input" required>
+      </div>
+
+      <div>
+        <button type="submit" class="btn w-full">Send Notification</button>
       </div>
     </form>
 
@@ -25,18 +26,14 @@
 </template>
 
 <script setup>
+import { useToast } from 'vue-toastification'
+const toast = useToast()
 import { ref } from 'vue'
 import { useRoom } from '~/composables/useRoom'
 import useUser from '~/composables/useUser'
 
 const user = useUser()
-onMounted(() => {
-  if ('Notification' in window ) {
-    Notification.requestPermission().then(permission => {
-      console.log('Notification permission:', permission)
-    })
-  }
-})
+
 const visitor = ref({
   name: '',
   purpose: '',
@@ -70,6 +67,10 @@ const registerVisitor = async () => {
       payload: visitorData
     })
   )
+  toast('Notification sent!', {
+      type: 'success',
+      toastClassName: 'my-toast'
+    })
   try {
     const response = await $fetch('/api/visitor/request', {
       method: 'POST',

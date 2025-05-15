@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <table class="min-w-full border text-left">
-      <thead>
+  <div class="">
+    <table class="w-full border text-left overflow-x-auto rounded-lg shadow">
+      <thead class="bg-gray-100 uppercase">
         <tr>
           <th class="border px-4 py-2">Name</th>
           <th class="border px-4 py-2">Phone</th>
@@ -18,13 +18,7 @@
         </tr>
       </tbody>
     </table>
-    <button @click="clearHistory" class="butn">Clear Visitor History</button>
-
-    <!-- <ul>
-      <li v-for="visitor in visitors" :key="visitor.id">
-        {{ visitor.name }} - {{ visitor.response || 'null' }} on {{ visitor.date }}
-      </li>
-    </ul> -->
+    <button @click="clearHistory" class="butn mt-4">Clear Visitor History</button>
 
   </div>
 </template>
@@ -73,7 +67,7 @@ watchEffect(() => {
           } else if (!existing.response && parsed.payload.response) {
             existing.response = parsed.payload.response
           }
-          if (Notification.permission === 'granted') {
+          if (user.role === 'Secretary' && Notification.permission === 'granted') {
             const notify = new Notification('visitor response', {
               body: `${parsed.payload.name} : ${parsed.payload.response}`,
               icon: 'favicon.ico'

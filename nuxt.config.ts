@@ -19,5 +19,9 @@ export default defineNuxtConfig({
     experimental: {
       websocket: true
     }
-  }
+  },
+  css: ['vue-toastification/dist/index.css',
+    '~/assets/css/toast.css'
+  ],
+  plugins: ['~/plugins/toast.client.js']
 })

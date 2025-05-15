@@ -3,7 +3,6 @@
     <ClientOnly>
       <dashboardLayout role="Secretary">
         <section id="register" class="mb-12">
-        <h2 class="text-2xl font-semibold">Register Visitor</h2>
         <registerVisitor />
         </section>
 
