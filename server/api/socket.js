@@ -17,7 +17,7 @@ export default defineWebSocketHandler({
         console.error(`Error: Invalid room ID format: "${room}" for connection:`, peer.request.url);
         peer.send("invalid room ID format");
         peer.close()
-        return
+        return 
       }
 
       peer.subscribe(room);
