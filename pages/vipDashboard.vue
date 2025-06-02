@@ -1,6 +1,8 @@
 <template>
   <ClientOnly>
     <dashboardLayout role="VIP">
+      
+      <userCard class="my-10"></userCard>
       <section id="pending" class="mb-12">
       <h2 class="text-2xl font-semibold">Pending requets</h2>
       <pendingRequests />
@@ -20,6 +22,7 @@
 
   const user = useUser()
   console.log('VIP Dashboard loaded with VIP ID:', user.vipId)
+  console.log(user.name)
 
 </script>
 

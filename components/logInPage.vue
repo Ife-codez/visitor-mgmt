@@ -49,8 +49,11 @@
       });
 
       userStore.login({
+        name: response.name,
         message: response.message,
         role: response.role,
+        _id: response._id,
+        avatar: response.avatar,
         vipId: response.vipId
       })
 

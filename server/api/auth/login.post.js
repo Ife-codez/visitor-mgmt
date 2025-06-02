@@ -19,7 +19,10 @@ export default defineEventHandler(async (event) => {
 
   return {
     message: 'Login successful',
+    name: user.name,
     role: user.role,
-    vipId: user.vipId
+    vipId: user.vipId,
+    _id: user._id,
+    avatar: user.avatar
   };
 });

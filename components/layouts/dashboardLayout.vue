@@ -17,11 +17,13 @@
 
     <footer class="text-center py-4 border-t mt-4">
       @2025 Visitor Management System
+      <footer />
     </footer>
   </div>
 </template>
 
 <script setup>
+  import footer from '~/components/footer.vue'
   const props = defineProps({
     role: String,
   })

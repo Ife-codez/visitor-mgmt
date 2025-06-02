@@ -9,20 +9,22 @@ export const useUserStore = defineStore('user', {
     //   }
     // }
     return {
+      _id: null,
+      name: null,
       message: null,
       role: null,
       vipId: null,
+      avatar: null,
       isLoggedIn: false,
     }
   },
     actions: {
       login(user) {
-        // this.message = user.message;
-        // this.role = user.role;
-        // this.vipId = user.vipId;
-        // this.isLoggedIn = true;
-
+        
         this.$patch((state) => {
+          state['_id'] = user._id,
+          state['name'] = user.name;
+          state['avatar'] = user.avatar
           state['message'] = user.message;
           state['role'] = user.role;
           state['vipId'] = user.vipId;
@@ -40,10 +42,13 @@ export const useUserStore = defineStore('user', {
         // }
       },
       logout() {
+        this.name = null;
         this.message = null;
         this.role = null;
         this.vipId = null;
         this.isLoggedIn = false;
+        this.avatar = null,
+        this._id = null
 
         // if(typeof window !== 'undefined') {
         //   localStorage.removeItem('user')
