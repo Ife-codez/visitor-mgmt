@@ -1,7 +1,7 @@
-import { useToast as toasty } from 'vue-toastification'
-export default function(){
-
+import { useToast } from 'vue-toastification'
+import type { ToastInterface } from 'vue-toastification'
+export default function (): ToastInterface | (() => void) {
   if (typeof window === 'undefined') return () => {}
-  const toast = toasty();
-  return toast;
+  const toast = useToast()
+  return toast
 }
