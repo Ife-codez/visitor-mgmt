@@ -25,7 +25,7 @@
 
 <script setup>
   import { reactive } from 'vue'
-import useCustomToast from '~/composables/useCustomToast';
+  import useCustomToast from '~/composables/useCustomToast';
   const toast = useCustomToast();
   const userStore = useUser();
 
