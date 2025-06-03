@@ -76,7 +76,6 @@ const registerVisitor = async () => {
       method: 'POST',
       body: visitorData
     })
-    console.log('Saved to MongoDB:', response)
   } catch (err) {
     console.error('Failed to save visitor to DB:', err)
   }

@@ -34,11 +34,12 @@ export default defineWebSocketHandler({
       const url = new URL(peer.request.url);
       const room = url.searchParams.get("room");
       const text = message.text();
-      console.log(`Received message "${text}" in room "${room}" from`, peer.request.url);
+      // console.log(`Received message "${text}" in room "${room}" from`, peer.request.url);
 
       if (text === 'ping') {
         peer.send('pong'); // Send a "pong" response
-        console.log(`Sent "pong" in response to "ping" from`, peer.request.url);
+        return
+        // console.log(`Sent "pong" in response to "ping" from`, peer.request.url);
       } else {
         peer.publish(room, text);
       }

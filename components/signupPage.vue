@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen max-h-screen flex items-center justify-center px-4">
+  <div class="flex flex-col items-center min-h-screen mx-auto px-4 py-8">
     <form @submit.prevent="handleSignup" class="w-full max-w-md bg-white shadow-md rounded-lg p-6 space-y-4">
       <h2 class="text-2xl font-bold text-center">Sign up page</h2>
       <!-- name section -->

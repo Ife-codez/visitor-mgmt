@@ -2,6 +2,8 @@
   <div>
     <ClientOnly>
       <dashboardLayout role="Secretary">
+
+        <userCard class="my-10 mx-auto"></userCard>
         <section id="register" class="mb-12">
         <registerVisitor />
         </section>

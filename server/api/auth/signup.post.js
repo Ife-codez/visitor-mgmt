@@ -3,7 +3,6 @@ import bcrypt from 'bcrypt';
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
-  console.log(body);
 
   const { name, email, role, password, vipId } = body;
 

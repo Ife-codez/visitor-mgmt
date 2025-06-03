@@ -15,15 +15,15 @@
       <slot />
     </div> 
 
-    <footer class="text-center py-4 border-t mt-4">
+    <footer class="text-center py-4 border-t mt-4 flex justify-center gap-4 items-center">
       @2025 Visitor Management System
-      <footer />
+      <footerDiv />
     </footer>
   </div>
 </template>
 
 <script setup>
-  import footer from '~/components/footer.vue'
+  import footerDiv from '~/components/footerDiv.vue'
   const props = defineProps({
     role: String,
   })

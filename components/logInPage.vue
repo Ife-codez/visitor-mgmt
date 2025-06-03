@@ -1,18 +1,23 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center px-4 py-10">
+  <div class="flex flex-col items-center min-h-screen mx-auto px-4 py-8">
     <form @submit.prevent="handleLogin" class="w-full max-w-md bg-white shadow-md rounded-lg p-6 space-y-4">
       <h2 class="text-2xl font-bold text-center">Log in page</h2>
+
       <div>
         <label for="email">Email:</label>
         <input type="email" id="email" v-model="loginForm.email" placeholder="email.." class="input" required>
       </div>
+
       <div>
         <label for="password">Password</label>
         <input :type="password" id="password" v-model="loginForm.password" placeholder="Enter Your Password" class="input" required>
       </div>
-      <div>
-        <button type="button" @click="switchPassword">eye</button>
-        <button type="submit" class="btn w-full">Log In</button>
+
+      <div class="flex justify-between items-center">
+        <button type="button" @click="switchPassword" class="text-sm text-blue-600 hover:underline">
+          {{ password === 'password' ? 'Show' : 'Hide' }} Password
+        </button>
+        <button type="submit" class="btn w-1/2">Log In</button>
       </div>
     </form>
   </div>
@@ -36,8 +41,8 @@
     password.value = 'password'
   }
   const loginForm = reactive ({
-    email: 'ifemoneyy@gmail.com',
-    password: 'ifeoluwa123'
+    email: '',
+    password: ''
   })
   
 

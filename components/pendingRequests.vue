@@ -96,7 +96,6 @@ const respond = async (visitor, status) => {
         response: payload.response
       }
     })
-    console.log('Response saved to DB:', res)
   } catch (err) {
     console.error('Failed to save response to DB:', err)
   }
@@ -113,7 +112,6 @@ onMounted(async () => {
     console.error('Failed to fetch pending visitors:', err)
   }
 })
-console.log('Notif supported:', 'Notification' in window)
  </script>
 
 <style scoped>

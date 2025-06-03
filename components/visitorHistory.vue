@@ -45,8 +45,6 @@ watchEffect(() => {
 
   // Reconnect socket when VIP ID is available
   ws = useRoom(user.vipId)
-  console.log('[VisitorHistory] Subscribed to room:', user.vipId)
-
   watch(
     () => ws?.data?.value,
     (raw) => {

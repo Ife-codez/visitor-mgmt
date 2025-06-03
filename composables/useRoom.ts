@@ -6,7 +6,6 @@ export const useRoom = (roomId: string) => {
   const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws'
   const url = `${protocol}://${window.location.host}/api/socket?room=${roomId}`
 
-  console.log('[useRoom] connecting to:', url)
 
   return useWebSocket(url, {
     autoReconnect: true,
