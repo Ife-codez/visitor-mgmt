@@ -24,10 +24,9 @@
 </template>
 
 <script setup>
-  import { useToast } from 'vue-toastification'
-  const toast = useToast()
   import { reactive } from 'vue'
-  
+import useCustomToast from '~/composables/useCustomToast';
+  const toast = useCustomToast();
   const userStore = useUser();
 
   const password = ref('password')

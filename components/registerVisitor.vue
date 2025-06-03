@@ -26,8 +26,8 @@
 </template>
 
 <script setup>
-import { useToast } from 'vue-toastification'
-const toast = useToast()
+import useCustomToast from '~/composables/useCustomToast';
+  const toast = useCustomToast();
 import { ref } from 'vue'
 import { useRoom } from '~/composables/useRoom'
 import useUser from '~/composables/useUser'

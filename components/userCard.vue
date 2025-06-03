@@ -19,8 +19,8 @@
 <script setup>
 import useUser from '~/composables/useUser'
 import { useClipboard } from '@vueuse/core';
-import { useToast } from 'vue-toastification'
-const toast = useToast()
+import useCustomToast from '~/composables/useCustomToast';
+  const toast = useCustomToast();
 const user = useUser()
 const { copy } = useClipboard()
 const avatar = computed(() => user.avatar || 'https://i.pravatar.cc/100')

@@ -40,8 +40,8 @@
 </template>
 
 <script setup>
-import { useToast } from 'vue-toastification'
-const toast = useToast()
+import useCustomToast from '~/composables/useCustomToast';
+  const toast = useCustomToast();
 import { reactive } from 'vue'
 
 const userData = reactive({
