@@ -10,7 +10,7 @@
         </section>
   
         <section id="history">
-          <h2 class="text-2xl font-semibold">Visitor History</h2>
+          <h2 class="text-2xl font-semibold mb-3">Visitor History</h2>
           <visitorHistory />
         </section>
       </dashboardLayout>
