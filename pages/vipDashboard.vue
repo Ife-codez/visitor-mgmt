@@ -5,7 +5,7 @@
         
         <userCard class="my-10"></userCard>
         <section id="pending" class="mb-12">
-        <h2 class="text-2xl font-semibold">Pending requets</h2>
+        <h2 class="text-2xl font-semibold mb-3">Pending requests</h2>
         <pendingRequests />
         </section>
   
