@@ -58,8 +58,8 @@
 
         <!-- Buttons -->
         <div class="mt-5 flex justify-end gap-3">
-          <button @click="showModal = false" class="btn-cancel">Cancel</button>
-          <button @click="submitModal" class="btn-submit">Submit</button>
+          <button @click="showModal = false" class="butn">Cancel</button>
+          <button @click="submitModal" class="btn">Submit</button>
         </div>
       </div>
     </div>
