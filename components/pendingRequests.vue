@@ -25,26 +25,28 @@
     </table>
   
     <!-- Modal -->
+    <!-- Modal -->
     <div v-if="showModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
       <div class="bg-white p-6 rounded-lg w-full max-w-md shadow-md">
         <h3 class="text-lg font-bold mb-4">{{ modalType }} Visitor</h3>
-        
+
         <!-- Radio options -->
         <div class="space-y-3">
-          <div
+          <label
             v-for="option in modalType === 'Approved' ? approveOptions : declineOptions"
             :key="option"
-            class="flex items-center gap-3 p-3 border rounded hover:bg-gray-100 transition cursor-pointer"
+            :for="option"
+            class="flex items-center gap-3 p-3 border rounded hover:bg-gray-100 transition cursor-pointer w-full"
           >
             <input
               type="radio"
               :id="option"
               :value="option"
               v-model="selectedReason"
-              class="form-radio accent-[#0f9c75] w-5 h-5"
+              class="accent-green-600 w-5 h-5"
             />
-            <label :for="option" class="text-gray-800">{{ option }}</label>
-          </div>
+            <span class="text-gray-800">{{ option }}</span>
+          </label>
         </div>
 
         <!-- Custom message -->
@@ -56,8 +58,8 @@
 
         <!-- Buttons -->
         <div class="mt-5 flex justify-end gap-3">
-          <button @click="showModal = false" class="butn">Cancel</button>
-          <button @click="submitModal" class="btn">Submit</button>
+          <button @click="showModal = false" class="btn-cancel">Cancel</button>
+          <button @click="submitModal" class="btn-submit">Submit</button>
         </div>
       </div>
     </div>
