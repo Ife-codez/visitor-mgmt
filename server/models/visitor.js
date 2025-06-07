@@ -4,6 +4,7 @@ export const visitor =  defineMongooseModel('Visitor', {
   purpose: String,
   phoneNo: String,
   response: String,
+  statusMessage: String,
   vipId: String,
   id: String,
   date: Date,

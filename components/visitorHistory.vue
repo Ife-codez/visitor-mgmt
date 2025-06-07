@@ -13,25 +13,24 @@
         <tr v-for="visitor in history" :key="visitor.id">
           <td class="border px-4 py-2">{{ visitor.name }}</td>
           <td class="border px-4 py-2">{{ visitor.phoneNo }}</td>
-          <td class="border px-4 py-2">{{ visitor.response }}</td>
+          <td class="border px-4 py-2">{{ visitor.statusMessage || visitor.response }}</td>
           <td class="border px-4 py-2">{{ formatDate(visitor.date) }}</td>
         </tr>
       </tbody>
     </table>
     <button @click="clearHistory" class="butn mt-4">Clear Visitor History</button>
-
   </div>
 </template>
 
 <script setup>
-
-import { ref, watchEffect } from 'vue'
+import { ref, watchEffect, watch, onMounted } from 'vue'
 import useUser from '~/composables/useUser'
 import { useRoom } from '~/composables/useRoom'
 
 const user = useUser()
 const history = ref([])
 let ws = null
+
 onMounted(() => {
   if ('Notification' in window ) {
     Notification.requestPermission().then(permission => {
@@ -64,10 +63,12 @@ watchEffect(() => {
             history.value.push(parsed.payload)
           } else if (!existing.response && parsed.payload.response) {
             existing.response = parsed.payload.response
+            existing.statusMessage = parsed.payload.statusMessage
           }
+
           if (user.role === 'Secretary' && Notification.permission === 'granted') {
-            const notify = new Notification('visitor response', {
-              body: `${parsed.payload.name} : ${parsed.payload.response}`,
+            const notify = new Notification('Visitor response', {
+              body: `${parsed.payload.name} : ${parsed.payload.statusMessage || parsed.payload.response}`,
               icon: 'favicon.ico'
             })
             notify.onclick = () => {
@@ -84,6 +85,7 @@ watchEffect(() => {
 })
 
 const formatDate = (date) => new Date(date).toLocaleString()
+
 onMounted(async () => {
   try {
     const res = await $fetch('/api/visitor/fetch', {
@@ -95,12 +97,13 @@ onMounted(async () => {
     console.error('Failed to fetch visitor history:', err)
   }
 })
+
 const clearHistory = async () => {
   if (!confirm('Are you sure you want to clear the visitor history?')) return
   try {
     const res = await $fetch('/api/visitor/clear', {
       method: 'POST',
-      body: {vipId: user.vipId}
+      body: { vipId: user.vipId }
     })
     history.value = []
     console.log(res.message)
@@ -111,5 +114,4 @@ const clearHistory = async () => {
 </script>
 
 <style scoped>
-
 </style>
