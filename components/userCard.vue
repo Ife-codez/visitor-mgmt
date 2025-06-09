@@ -20,7 +20,7 @@
 import useUser from '~/composables/useUser'
 import { useClipboard } from '@vueuse/core';
 import useCustomToast from '~/composables/useCustomToast';
-  const toast = useCustomToast();
+const toast = useCustomToast();
 const user = useUser()
 const { copy } = useClipboard()
 const avatar = computed(() => user.avatar || 'https://i.pravatar.cc/100')
