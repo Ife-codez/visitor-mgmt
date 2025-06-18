@@ -23,7 +23,7 @@ import useCustomToast from '~/composables/useCustomToast';
 const toast = useCustomToast();
 const user = useUser()
 const { copy } = useClipboard()
-const avatar = computed(() => user.avatar || 'https://i.pravatar.cc/100')
+const avatar = computed(() => user.avatar || 'https://cdn-icons-png.flaticon.com/512/149/149071.png')
 const copyId = () => {
   copy(user.vipId)
    toast('Copied!', {
