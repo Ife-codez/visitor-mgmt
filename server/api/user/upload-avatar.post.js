@@ -1,5 +1,5 @@
+import { v2 as cloudinary } from 'cloudinary'
 import formidable from 'formidable'
-import path, { join } from 'path'
 import { useMongooseModel } from '~/server/utils/useMongooseModel'
 
 export const config = {
@@ -8,10 +8,14 @@ export const config = {
   }
 }
 
-export default defineEventHandler(async (event) => {
-  const uploadDir = join(process.cwd(), 'public', 'uploads')
-  const form = formidable({ uploadDir, keepExtensions: true })
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+})
 
+export default defineEventHandler(async (event) => {
+  const form = formidable({ keepExtensions: true })
   const [fields, files] = await new Promise((resolve, reject) => {
     form.parse(event.req, (err, fields, files) => {
       if (err) reject(err)
@@ -20,20 +24,16 @@ export default defineEventHandler(async (event) => {
   })
 
   const userId = fields.userId
-  const file = files.avatar[0]
-  const filename = path.basename(file.filepath)
-  const avatarPath = `/uploads/${filename}`
+  const file = files.avatar[0].filepath
+
+  const uploadResult = await cloudinary.uploader.upload(file)
 
   const User = useMongooseModel('User')
   const user = await User.findById(userId)
-  if (!user) {
-    throw createError({ statusCode: 404, message: 'User not found!' })
-  }
+  if (!user) throw createError({ statusCode: 404, message: 'User not found' })
 
-  user.avatar = avatarPath
+  user.avatar = uploadResult.secure_url
   await user.save()
 
-  console.log('Avatar saved at:', avatarPath)
-
-  return { avatarUrl: avatarPath }
+  return { avatarUrl: uploadResult.secure_url }
 })
